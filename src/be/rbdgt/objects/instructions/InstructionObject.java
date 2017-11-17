@@ -2,12 +2,11 @@ package be.rbdgt.objects.instructions;
 
 import be.rbdgt.PictureSketchV2;
 import be.rbdgt.util.Source;
-import stabilocolors.library.Stabilo;
 
 public class InstructionObject {
 	
 	private Source source;
-	private Stabilo stabilo;
+//	private Stabilo stabilo;
 	
 	private int strokeWeight = 1;
 	private int penColor; 

@@ -3,11 +3,13 @@ package be.rbdgt.drawing;
 import java.util.ArrayList;
 
 import be.rbdgt.PictureSketchV2;
-import be.rbdgt.objects.Outputimg;
 import be.rbdgt.util.Logger;
-import processing.core.*;
-import stabilocolors.library.*;
-import gab.opencv.*;
+import gab.opencv.Contour;
+import gab.opencv.OpenCV;
+import processing.core.PConstants;
+import processing.core.PImage;
+import processing.core.PVector;
+import stabilocolors.library.Stabilo;
 
 public class Dcontour {
 	

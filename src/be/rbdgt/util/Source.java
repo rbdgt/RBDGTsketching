@@ -1,16 +1,13 @@
 package be.rbdgt.util;
 
-import gab.opencv.*;
+import java.awt.Rectangle;
+
+import be.rbdgt.PictureSketchV2;
+import be.rbdgt.objects.Polygon;
+import gab.opencv.OpenCV;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
-
-import java.awt.Rectangle;
-import java.util.ArrayList;
-
-import be.rbdgt.PictureSketchV2;
-import be.rbdgt.objects.Outputimg;
-import be.rbdgt.objects.Polygon;
 
 public class Source {
 
@@ -18,7 +15,7 @@ public class Source {
 
 	Logger log;
 	PictureSketchV2 pa;
-	String info = null;
+	String info = "no info available";
 	Polygon poly;
 
 	int lCanny = 50;
@@ -105,6 +102,7 @@ public class Source {
 	public PImage facesOriginalHollowImage(boolean invert, int shape, int rotation, int shrink) {
 		PImage input = faceImageHollow(shape, rotation, shrink);
 		this.info = "fohi("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+")";
+
 		if (invert) {
 			input.filter(PConstants.INVERT);
 		}
