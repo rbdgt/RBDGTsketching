@@ -22,11 +22,12 @@ public class Instructions {
     private static Source source;
     //private static Stabilo stabilo;
 
+
     public static void setFile(PictureSketchV2 pa) {
-	pa.setFile("card", "kf2", "jpg", "face", "output");
+	pa.setFile("movs", "camel", "mov", "test", "output");
     }
 
-    public static void draw(PictureSketchV2 pa) {
+    public static void draw(PictureSketchV2 pa, boolean isMovie) {
 	//stabilo = pa.getStabilo();
 	source = pa.getSource();
 
@@ -49,15 +50,15 @@ public class Instructions {
 	// 200);
 	// pa.delaunaySquares.draw(source.oi(false), 1, SC.YELLOW, SC.LIGHTGREY,
 	// 0, 10, 20, 5, 0);
-	 pa.dlines.draw(source.fohi(false, TRIANGLE, 0, 0), 1, SC.APRICOT, 50, 10, 0.2f, false, false, false);
+	 //pa.dlines.draw(source.fohi(false, TRIANGLE, 0, 0), 1, SC.APRICOT, 50, 10, 0.2f, false, false, false);
 	// pa.vertex.draw(source.fchi(false, TRIANGLE, 0, -0, 0, 150), 1,
 	// SC.BLACK);
 
 	PImage img = source.ci(false, 20, 40);
 
-	pa.contour.draw(source.cannyImage(false, 200, 500), 1, SC.LIGHTGREY);
-	pa.delaunaySquares.draw(source.oi(false), 1, SC.ORANGE, SC.ORANGE, 0, 10, 20, 5, 0);
-	pa.delaunaySquares.draw(source.oi(false), 1, SC.NIGHTBLUE, SC.TURQUOISE, 0, 10, 20, 5, 0);
+	pa.vertex.draw(source.cannyImage(false, 200, 500), 1, SC.BLACK);
+	//pa.delaunaySquares.draw(source.oi(false), 1, SC.ORANGE, SC.ORANGE, 0, 10, 20, 5, 0);
+	//pa.delaunaySquares.draw(source.oi(false), 1, SC.NIGHTBLUE, SC.TURQUOISE, 0, 10, 20, 5, 0);
 
     }
 }

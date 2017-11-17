@@ -22,7 +22,7 @@ public class Logger {
 	this.report = report;
     }
 
-    public void createLog() {
+    public void createLog(String s) {
 	try {
 	    File file = new File(outputfolder + "/" + filename + "_" + suffix + "_log.txt");
 	    if (!file.exists()) {
@@ -30,18 +30,13 @@ public class Logger {
 	    }
 	    FileWriter fw = new FileWriter(file.getAbsoluteFile());
 	    writer = new BufferedWriter(fw);
+	    writeLogLine(s);
+	    writeLogLine(" ");
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
     }
-
-    // writer = new PrintWriter(file);
-
-    /*
-     * public void createLog() { printOutput = createWriter("/" + folder + "/" +
-     * filename + "_" + suffix + "_log.txt"); }
-     */
 
     public void writeLogLine(String s) {
 	if (report) {

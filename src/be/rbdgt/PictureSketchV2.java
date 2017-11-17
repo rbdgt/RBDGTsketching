@@ -17,18 +17,19 @@ import be.rbdgt.util.Source;
 import gab.opencv.OpenCV;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.video.Movie;
 import stabilocolors.library.Stabilo;
 
 public class PictureSketchV2 extends PApplet {
 
-//    private final int CIRCLE = 0;
-//    private final int TRIANGLE = 1;
-//    private final int SQUARE = 2;
-//    private final boolean INV = true;
-//    private final int L = 0; // int for LEFT hatching
-//    private final int R = 1; // int for RIGHT hatching
-//    private final int V = 2; // int for VERTICAL hatching
-//    private final int H = 3; // int for HORIZONTAL hatching
+    // private final int CIRCLE = 0;
+    // private final int TRIANGLE = 1;
+    // private final int SQUARE = 2;
+    // private final boolean INV = true;
+    // private final int L = 0; // int for LEFT hatching
+    // private final int R = 1; // int for RIGHT hatching
+    // private final int V = 2; // int for VERTICAL hatching
+    // private final int H = 3; // int for HORIZONTAL hatching
 
     OpenCV openCV;
     String[] arguments;
@@ -46,6 +47,9 @@ public class PictureSketchV2 extends PApplet {
     private Logger log;
 
     private Source source = new Source(log, this);
+    private Movie mov;
+    private boolean fileIsMovie = false;
+    private int fCount = 0;
 
     public Parser parser;
     public Dcontour contour;
@@ -72,17 +76,17 @@ public class PictureSketchV2 extends PApplet {
 	PApplet.main(new String[] { "be.rbdgt.PictureSketchV2" });
     }
 
-    public void runSketch(String[] fileData) {
-
-	setFile(fileData);
-	Map sketch = Thread.getAllStackTraces();
-    }
+    // public void runSketch(String[] fileData) {
+    // setFile(fileData);
+    // //Map sketch = Thread.getAllStackTraces();
+    // }
 
     public void initSketch() {
 	Instructions.setFile(this);
 	log = new Logger(outputFolder, folder, filename, suffix, false);
 	source = new Source(log, this);
 	parser = new Parser(this, source, stabilo);
+
 	contour = new Dcontour(log, this, stabilo);
 	delaunay = new Ddelaunay(log, this, stabilo);
 	delaunaySquares = new DdelaunaySquares(log, this, stabilo);
@@ -93,7 +97,6 @@ public class PictureSketchV2 extends PApplet {
 	squarehatch = new Dsquarehatch(log, this, stabilo);
 	vertex = new Dvertex(log, this, stabilo);
 	dlines = new Ddistortedlines(log, this, stabilo);
-
     }
 
     private void parseArgs() {
@@ -103,28 +106,39 @@ public class PictureSketchV2 extends PApplet {
     }
 
     public void settings() {
-	size(400, 400);
+	if (fileIsMovie) {
+	    size(1280, 720);
+	} else {
+	    size(400, 400);
+	}
     }
 
     public void setup() {
 	initSketch();
-	original = loadImage(folder + "/" + filename + "." + extension);
+	if (fileIsMovie) {
+	    mov = new Movie(this, folder + "/" + filename + "." + extension);
+	    mov.play();
+	    mov.loop();
+	} else {
+	    original = loadImage(folder + "/" + filename + "." + extension);
+	    resizeMethod();
+	}
 	background(255);
-	resizeMethod();
-
     }
 
     public void draw() {
-	original.resize(width, height);
-	log.createLog();
-	log.writeLogLine("width: " + width + " / height: " + height);
-	log.writeLogLine("");
+	if (!fileIsMovie) {
+	    original.resize(width, height);
+	}
+
+	log.createLog("width: " + width + " / height: " + height);
+
 	if (saveSVG) {
 	    beginRecord(SVG, "/" + outputFolder + "/" + filename + "_" + suffix + ".svg");
 	    println("Begin SVG record: ");
 	}
 
-	Instructions.draw(this);
+	Instructions.draw(this, fileIsMovie);
 
 	if (saveSVG) {
 	    endRecord();
@@ -138,8 +152,15 @@ public class PictureSketchV2 extends PApplet {
 	}
 
 	log.closeLog();
-	noLoop();
-	println("DONE!");
+
+	if (fileIsMovie) {
+	    loop();
+	} else {
+	    noLoop();
+	}
+
+	fCount++;
+	println("Frame " + fCount + " done!");
     }
 
     private void resizeMethod() {
@@ -219,15 +240,18 @@ public class PictureSketchV2 extends PApplet {
 	this.extension = extension;
 	this.suffix = suffix;
 	this.outputFolder = outputFolder;
+	if (extension.equalsIgnoreCase("mov")) {
+	    fileIsMovie = true;
+	}
     }
 
-    public void setFile(String[] fd) { // TODO
-	// too
-	// convoluted
-	this.folder = fd[0];
-	this.filename = fd[1];
-	this.extension = fd[2];
-	this.suffix = fd[3];
-	this.outputFolder = fd[4];
-    }
+    // public void setFile(String[] fd) { // TODO
+    // // too
+    // // convoluted
+    // this.folder = fd[0];
+    // this.filename = fd[1];
+    // this.extension = fd[2];
+    // this.suffix = fd[3];
+    // this.outputFolder = fd[4];
+    // }
 }

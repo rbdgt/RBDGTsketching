@@ -25,6 +25,9 @@
 	<classpathentry exported="true" kind="lib" path="libraries/svg/svg.jar"/>
 	<classpathentry exported="true" kind="lib" path="libraries/svg/batik-xml-1.8.jar"/>
 	<classpathentry kind="lib" path="libraries/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robin De Groote/CloudStation/P3Sketches/libraries/video/library/gstreamer-java.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robin De Groote/CloudStation/P3Sketches/libraries/video/library/jna.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robin De Groote/CloudStation/P3Sketches/libraries/video/library/video.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
