@@ -26,7 +26,6 @@ public class DdelaunaySquares {
 	}
 	
 	public void draw(PImage img, int strokeWeight, int detColor, int penColor, int minLength, int maxLength, int iSide, int holes, int randomness) {
-		
 		log.writeLogLine("[ DELAUNAY SQUARES]");
 		//log.writeLogLine("-----------------------------------------");
 		log.writeLogLine(pa.getSource().getInfo());
