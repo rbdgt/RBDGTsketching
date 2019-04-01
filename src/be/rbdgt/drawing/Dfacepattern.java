@@ -7,8 +7,7 @@ import be.rbdgt.objects.Polyfill;
 import be.rbdgt.objects.Polygon;
 import be.rbdgt.util.Logger;
 import be.rbdgt.util.Stabilo;
-//import gab.opencv.OpenCV;
-import be.rbdgt.customProcessingOCV.*;
+import gab.opencv.OpenCV;
 
 public class Dfacepattern {
 
