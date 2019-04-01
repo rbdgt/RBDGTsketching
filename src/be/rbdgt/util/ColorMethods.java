@@ -44,6 +44,10 @@ public class ColorMethods {
 		return cacheHsbValue[2] * colorModeZ;
 	}
 	
+	public static float getBrightness(int rgb){
+	    return brightness(rgb);
+	}
+	
 	public static int getAverageColor(PImage img) {
 		img.loadPixels();
 		int r = 0, g = 0, b = 0;

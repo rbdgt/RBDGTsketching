@@ -1,34 +1,19 @@
 package be.rbdgt;
 
+import be.rbdgt.util.Hatch;
+import be.rbdgt.util.Shape;
 import be.rbdgt.util.SC;
 import be.rbdgt.util.Source;
-import processing.core.PImage;
 
 public class Instructions {
-
-    private static final int CIRCLE = 0;
-    private static final int TRIANGLE = 1;
-    private static final int SQUARE = 2;
-
-    private static final boolean INV = true;
-    private static final int L = 0; // int for LEFT hatching
-    private static final int R = 1; // int for RIGHT hatching
-    private static final int V = 2; // int for VERTICAL hatching
-    private static final int H = 3; // int for HORIZONTAL hatching
-    private static final int RD = 4; // int for Random Diagonal hatching
-    private static final int RHV = 5; // int for Random Horizontal/Vertical
-				      // hatching
-    private static final int ARAB = 6; // int for Arab pattern
+   
     private static Source source;
-    //private static Stabilo stabilo;
-
 
     public static void setFile(PictureSketchV2 pa) {
-	pa.setFile("movs", "camel", "mov", "test", "output");
+	pa.setFile("faces", "male", "jpg", "01", "output", timestamp);
     }
 
-    public static void draw(PictureSketchV2 pa, boolean isMovie) {
-	//stabilo = pa.getStabilo();
+    public static void draw(PictureSketchV2 pa) {
 	source = pa.getSource();
 
 	/*
@@ -39,7 +24,7 @@ public class Instructions {
 	 * SC.BLACK);
 	 */
 
-	// pa.facepattern.drawface(1, TRIANGLE, 45, 130, 120, 1, 60, SC.TURQUOISE, 100, RD);
+	pa.facepattern.drawface(1, Shape.TRIANGLE, 45, 130, 120, 1, 60, SC.TURQUOISE, 100, 1);
 	// pa.delaunaySquares.draw(source.oi(false), 1, SC.BLACK, SC.APRICOT, 0, 10, 20, 5, 0);
 	// pa.contour.draw(source.fci(false, TRIANGLE, -90, -0, 50, 150), 1,
 	// SC.BLACK);
@@ -50,15 +35,37 @@ public class Instructions {
 	// 200);
 	// pa.delaunaySquares.draw(source.oi(false), 1, SC.YELLOW, SC.LIGHTGREY,
 	// 0, 10, 20, 5, 0);
-	 //pa.dlines.draw(source.fohi(false, TRIANGLE, 0, 0), 1, SC.APRICOT, 50, 10, 0.2f, false, false, false);
+	//pa.dlines.draw(source.fohi(false, Shape.triangle(), 0, 0), 1, SC.APRICOT, 50, 10, 0.2f, false, false, false);
 	// pa.vertex.draw(source.fchi(false, TRIANGLE, 0, -0, 0, 150), 1,
 	// SC.BLACK);
 
-	PImage img = source.ci(false, 20, 40);
+	//PImage img = source.ci(false, 20, 40);
 
-	pa.vertex.draw(source.cannyImage(false, 200, 500), 1, SC.BLACK);
-	//pa.delaunaySquares.draw(source.oi(false), 1, SC.ORANGE, SC.ORANGE, 0, 10, 20, 5, 0);
+	
+	//pa.delaunaySquares.draw(source.oi(false), 1, SC.BLACK, SC.RED, 0, 10, 20, 5, 0);
+	
 	//pa.delaunaySquares.draw(source.oi(false), 1, SC.NIGHTBLUE, SC.TURQUOISE, 0, 10, 20, 5, 0);
+	pa.contour.draw(source.cannyImage(false, 200, 500, 180), 1, SC.BLACK);
+	//pa.contour.draw(source.cannyImage(false, 20, 40, 180), 1, SC.RED);
+	
+	//pa.contour.draw(source.cannyImage(false, 100, 250, 180), 1, SC.BLACK);
+	//pa.sketchlines.draw(source.ohci(false), 1, SC.BLACK, SC.BLACK, 1000);
+	
+	//doomglitter(pa);
+	
+	//scribble(pa);
 
+    }
+    
+    public static void scribble(PictureSketchV2 pa){
+	pa.sketchlines.draw(source.oi(false), 1, SC.BLACK, SC.BLACK, 2000);
+	pa.sketchlines.draw(source.oi(false), 1, SC.ROSE, SC.CRIMSONRED, 2000);
+    }
+    
+    public static void doomglitter(PictureSketchV2 pa){
+	pa.background(0);
+	//pa.delaunaySquares.draw(source.oi(false), 1, SC.ORANGE, SC.GOLD, 0, 10, 20, 0, 5);
+	pa.squares.draw(source.originalImage(false), 1, SC.SILVER, 3, 180, 4, 20);
+	pa.crosses.draw(source.originalImage(false), 1, SC.ORANGE, SC.GOLD, Hatch.HORIZONTAL, 300, 40, 80, 0);
     }
 }

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import be.rbdgt.PictureSketchV2;
 import be.rbdgt.objects.SketchLine;
 import be.rbdgt.util.Logger;
+import be.rbdgt.util.Stabilo;
 import be.rbdgt.util.Utility;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
-import stabilocolors.library.Stabilo;
 
 public class Dsketchlines {
 

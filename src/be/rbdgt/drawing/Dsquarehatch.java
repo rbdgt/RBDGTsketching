@@ -7,9 +7,9 @@ import be.rbdgt.objects.SimpleLine;
 import be.rbdgt.util.ColorMethods;
 import be.rbdgt.util.Logger;
 import be.rbdgt.util.SC;
+import be.rbdgt.util.Stabilo;
 import processing.core.PConstants;
 import processing.core.PImage;
-import stabilocolors.library.Stabilo;
 
 public class Dsquarehatch {
 	

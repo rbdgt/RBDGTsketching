@@ -6,8 +6,8 @@ import be.rbdgt.PictureSketchV2;
 import be.rbdgt.objects.Polyfill;
 import be.rbdgt.objects.Polygon;
 import be.rbdgt.util.Logger;
+import be.rbdgt.util.Stabilo;
 import gab.opencv.OpenCV;
-import stabilocolors.library.Stabilo;
 
 public class Dfacepattern {
 

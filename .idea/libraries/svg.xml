@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="svg">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libraries/svg/batik-awt-util-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/svg/batik-util-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/svg/svg.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/svg/batik-xml-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/svg/batik-ext-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/svg/batik-svggen-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/svg/batik-dom-1.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="libraries">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libraries/opencv_processing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/StabiloColors.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/gstreamer-java.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/quickhull3d.1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/video.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/jna.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/mesh.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/commons-io-2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/opencv-245.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

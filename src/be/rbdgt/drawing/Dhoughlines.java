@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import be.rbdgt.PictureSketchV2;
 import be.rbdgt.util.Logger;
-import gab.opencv.*;
+import be.rbdgt.util.Stabilo;
+import gab.opencv.Line;
+import gab.opencv.OpenCV;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
-import stabilocolors.library.Stabilo;
 
 public class Dhoughlines {
 

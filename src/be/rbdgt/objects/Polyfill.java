@@ -1,10 +1,10 @@
 package be.rbdgt.objects;
 
 import be.rbdgt.PictureSketchV2;
+import be.rbdgt.util.Stabilo;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PVector;
-import stabilocolors.library.*;
 
 public class Polyfill extends PApplet {
 

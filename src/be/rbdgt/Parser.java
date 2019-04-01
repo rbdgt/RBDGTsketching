@@ -4,18 +4,18 @@ import be.rbdgt.util.SC;
 import be.rbdgt.util.Source;
 import be.rbdgt.util.Utility;
 import processing.core.PImage;
-import stabilocolors.library.Stabilo;
+import be.rbdgt.util.Stabilo;
 
 public class Parser {
 
 	private PictureSketchV2 pa;
 	private Source source;
-	private Stabilo stabilo;
+	//private Stabilo stabilo;
 
 	public Parser(PictureSketchV2 pa, Source source, Stabilo stabilo) {
 		this.pa = pa;
-		this.source = source;
-		this.stabilo = stabilo;
+		this.source = source; //TODO tests
+		//this.stabilo = stabilo;
 	}
 
 	public void parseInstr(String args[]) {
@@ -181,7 +181,7 @@ public class Parser {
 
 	private PImage getSourceImage(String sourcestring) {
 		boolean invert;
-		int shape, rotation, shrink, lC, rC;
+		int shape, rotation, shrink, lC, rC, tH;
 		sourcestring = sourcestring.replace("source.", "");
 		String sourcetype = sourcestring.substring(0, sourcestring.indexOf("("));
 		sourcestring = sourcestring.substring(sourcestring.indexOf("(") + 1, sourcestring.indexOf(")"));
@@ -219,7 +219,8 @@ public class Parser {
 			shrink = Integer.parseInt(sourceargs[3]);
 			lC = Integer.parseInt(sourceargs[4]);
 			rC = Integer.parseInt(sourceargs[5]);
-			return source.fci(invert, shape, rotation, shrink, lC, rC);
+			tH = Integer.parseInt(sourceargs[6]);
+			return source.fci(invert, shape, rotation, shrink, lC, rC, tH);
 		case "fchi":
 			invert = sourceargs[0].equals("true");
 			shape = Utility.shapeToInt(sourceargs[1]);
@@ -227,12 +228,15 @@ public class Parser {
 			shrink = Integer.parseInt(sourceargs[3]);
 			lC = Integer.parseInt(sourceargs[4]);
 			rC = Integer.parseInt(sourceargs[5]);
-			return source.fchi(invert, shape, rotation, shrink, lC, rC);
+			rC = Integer.parseInt(sourceargs[5]);
+			tH = Integer.parseInt(sourceargs[6]);
+			return source.fchi(invert, shape, rotation, shrink, lC, rC, tH);
 		case "ci":
 			invert = sourceargs[0].equals("true");
 			lC = Integer.parseInt(sourceargs[1]);
 			rC = Integer.parseInt(sourceargs[2]);
-			return source.ci(invert, lC, rC);
+			tH = Integer.parseInt(sourceargs[6]);
+			return source.ci(invert, lC, rC, tH);
 		}
 		return null;
 	}

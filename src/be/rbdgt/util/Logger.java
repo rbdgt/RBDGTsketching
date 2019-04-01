@@ -9,13 +9,13 @@ public class Logger {
 
     private BufferedWriter writer = null;
     private String outputfolder;
-    private String folder;
+    //private String folder;
     private String filename;
     private String suffix;
     private boolean report;
 
     public Logger(String outputfolder, String folder, String filename, String suffix, boolean report) {
-	this.folder = folder;
+	//this.folder = folder;
 	this.outputfolder = outputfolder;
 	this.filename = filename;
 	this.suffix = suffix;

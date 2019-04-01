@@ -32,7 +32,9 @@ public class Utility {
 		PVector[] targets = getTargets(img, detColor, particles); // get
 																	// particlecloud
 		for (int i = 0; i < targets.length; i++) {
+		    if (targets[i].x!=0 && targets[i].y!=0) {
 			pointCloud.add(targets[i]);
+		    }
 		}
 		return pointCloud;
 	}

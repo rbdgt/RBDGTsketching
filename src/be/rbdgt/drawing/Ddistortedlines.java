@@ -3,8 +3,8 @@ package be.rbdgt.drawing;
 import be.rbdgt.PictureSketchV2;
 import be.rbdgt.util.ColorMethods;
 import be.rbdgt.util.Logger;
+import be.rbdgt.util.Stabilo;
 import processing.core.PImage;
-import stabilocolors.library.Stabilo;
 
 public class Ddistortedlines {
 

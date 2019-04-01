@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import be.rbdgt.PictureSketchV2;
 import be.rbdgt.util.Logger;
+import be.rbdgt.util.Stabilo;
 import gab.opencv.Contour;
 import gab.opencv.OpenCV;
 import processing.core.PConstants;
 import processing.core.PImage;
 import processing.core.PVector;
-import stabilocolors.library.Stabilo;
 
 public class Dcontour {
 	

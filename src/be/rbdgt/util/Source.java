@@ -4,7 +4,8 @@ import java.awt.Rectangle;
 
 import be.rbdgt.PictureSketchV2;
 import be.rbdgt.objects.Polygon;
-import gab.opencv.OpenCV;
+import be.rbdgt.customProcessingOCV.OpenCV;
+//import gab.opencv.OpenCV;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.core.PImage;
@@ -51,16 +52,16 @@ public class Source {
 		return facesOriginalHighContrastImage(invert, shape, rotation, shrink);
 	}
 
-	public PImage fci(boolean invert, int shape, int rotation, int shrink, int lC, int rC) {
-		return facesCannyImage(invert, shape, rotation, shrink, lC, rC);
+	public PImage fci(boolean invert, int shape, int rotation, int shrink, int lC, int rC, int tH) {
+		return facesCannyImage(invert, shape, rotation, shrink, lC, rC, tH);
 	}
 
-	public PImage fchi(boolean invert, int shape, int rotation, int shrink, int lC, int rC) {
-		return facesCannyHollowImage(invert, shape, rotation, shrink, lC, rC);
+	public PImage fchi(boolean invert, int shape, int rotation, int shrink, int lC, int rC, int tH) {
+		return facesCannyHollowImage(invert, shape, rotation, shrink, lC, rC, tH);
 	}
 
-	public PImage ci(boolean invert, int lC, int rC) {
-		return cannyImage(invert, lC, rC);
+	public PImage ci(boolean invert, int lC, int rC, int tH) {
+		return cannyImage(invert, lC, rC, tH);
 	}
 
 	/*public ArrayList<Contour> originalArraylist(PictureSketchV2 pa, boolean invert) {
@@ -121,9 +122,10 @@ public class Source {
 	}
 
 	public PImage facesCannyImage(boolean invert, int shape, int rotation, int shrink, int lC,
-			int rC) {
+			int rC, int threshold) {
 		OpenCV openCV = new OpenCV(pa, faceImage(shape, rotation, shrink));
 		this.info = "fci("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+", "+lC+", "+rC+")";
+		openCV.threshold(threshold);
 		openCV.findCannyEdges(lC, rC);
 		if (invert) {
 			openCV.invert();
@@ -132,9 +134,10 @@ public class Source {
 	}
 
 	public PImage facesCannyHollowImage(boolean invert, int shape, int rotation, int shrink, int lC,
-			int rC) {
+			int rC, int threshold) {
 		OpenCV openCV = new OpenCV(pa, faceImageHollow(shape, rotation, shrink));
 		this.info = "fchi("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+", "+lC+", "+rC+")";
+		openCV.threshold(threshold);
 		openCV.findCannyEdges(lC, rC);
 		if (invert) {
 			openCV.invert();
@@ -142,13 +145,15 @@ public class Source {
 		return openCV.getSnapshot();
 	}
 
-	public PImage cannyImage(boolean invert, int lC, int rC) {
+	public PImage cannyImage(boolean invert, int lC, int rC, int threshold) {
 		OpenCV openCV = new OpenCV(pa, pa.getOriginal());
 		this.info = "ci("+invert+", "+lC+", "+rC+")";
+		openCV.threshold(threshold);
 		openCV.findCannyEdges(lC, rC);
 		if (invert) {
 			openCV.invert();
 		}
+		
 		return openCV.getSnapshot();
 	}
 

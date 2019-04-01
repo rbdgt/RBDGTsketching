@@ -28,6 +28,8 @@ public class SC {
 	public static final int DARKOCHRE = 89;
 	public static final int LIGHTGREY = 94;
 	public static final int DARKGREY = 96;
+	public static final int SILVER = 94;
+	public static final int GOLD = 44;
 
 	// Returns color code as int from color name
 	public static int getColorCode(String colorName) {
@@ -114,6 +116,10 @@ public class SC {
 			return 97;
 		case "PAYNESGREY":
 			return 98;
+		case "SILVER":
+		    return 94;
+		case "GOLD":
+		    return 44;
 		default:
 			return 0;
 		}
