@@ -9,22 +9,25 @@ public class Logger {
 
     private BufferedWriter writer = null;
     private String outputfolder;
-    //private String folder;
+    // private String folder;
     private String filename;
     private String suffix;
+    private String timestamp;
     private boolean report;
 
-    public Logger(String outputfolder, String folder, String filename, String suffix, boolean report) {
-	//this.folder = folder;
+    public Logger(String outputfolder, String folder, String filename, String suffix, String timestamp,
+	    boolean report) {
+	// this.folder = folder;
 	this.outputfolder = outputfolder;
 	this.filename = filename;
 	this.suffix = suffix;
 	this.report = report;
+	this.timestamp = timestamp;
     }
 
     public void createLog(String s) {
 	try {
-	    File file = new File(outputfolder + "/" + filename + "_" + suffix + "_log.txt");
+	    File file = new File(outputfolder + "/" + filename + "_" + suffix + timestamp + "_log.txt");
 	    if (!file.exists()) {
 		file.createNewFile();
 	    }

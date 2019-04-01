@@ -1,13 +1,18 @@
 package be.rbdgt;
 
+import java.time.LocalDateTime;
+
 import be.rbdgt.util.Hatch;
-import be.rbdgt.util.Shape;
 import be.rbdgt.util.SC;
+import be.rbdgt.util.Shape;
 import be.rbdgt.util.Source;
 
 public class Instructions {
    
     private static Source source;
+    private static LocalDateTime now = LocalDateTime.now();
+    private static String timestamp = "_" + String.format("%02d",now.getHour()) + String.format("%02d",now.getMinute()) + String.format("%02d",now.getSecond()) + "_" + String.format("%02d",now.getDayOfMonth())
+	    + String.format("%02d",now.getMonthValue()) + String.format("%02d",now.getYear());
 
     public static void setFile(PictureSketchV2 pa) {
 	pa.setFile("faces", "male", "jpg", "01", "output", timestamp);

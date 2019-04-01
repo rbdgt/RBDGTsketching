@@ -15,6 +15,7 @@ public class InstructionObject {
 	private String extension;
 	private String folder;
 	private String suffix;
+	private String timestamp;
 
 	private String outputFolder;
 	
@@ -33,7 +34,7 @@ public class InstructionObject {
 	}
 	
 	public void setFile(PictureSketchV2 pa) {
-		pa.setFile(folder, filename, extension, suffix, outputFolder);
+		pa.setFile(folder, filename, extension, suffix, outputFolder, timestamp);
 	}
 	
 	public void initInstructionObject(int strokeWeight, int penColor){ //TODO make abstract

@@ -1,5 +1,7 @@
 package be.rbdgt;
 
+//import gab.opencv.OpenCV;
+import be.rbdgt.customProcessingOCV.OpenCV;
 import be.rbdgt.drawing.Dcontour;
 import be.rbdgt.drawing.Dcrosses;
 import be.rbdgt.drawing.Ddelaunay;
@@ -15,11 +17,6 @@ import be.rbdgt.drawing.Dvertex;
 import be.rbdgt.util.Logger;
 import be.rbdgt.util.Source;
 import be.rbdgt.util.Stabilo;
-
-import java.time.LocalDateTime;
-
-//import gab.opencv.OpenCV;
-import be.rbdgt.customProcessingOCV.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.video.Movie;
@@ -32,14 +29,15 @@ public class PictureSketchV2 extends PApplet {
 
     private Stabilo stabilo = new Stabilo(this);
 
-    LocalDateTime now = LocalDateTime.now();
-    String timestamp = "_" + String.format("%02d",now.getHour()) + String.format("%02d",now.getMinute()) + String.format("%02d",now.getSecond()) + "_" + String.format("%02d",now.getDayOfMonth())
-	    + String.format("%02d",now.getMonthValue()) + String.format("%02d",now.getYear());
+//    LocalDateTime now = LocalDateTime.now();
+//    String timestamp = "_" + String.format("%02d",now.getHour()) + String.format("%02d",now.getMinute()) + String.format("%02d",now.getSecond()) + "_" + String.format("%02d",now.getDayOfMonth())
+//	    + String.format("%02d",now.getMonthValue()) + String.format("%02d",now.getYear());
 
     private String filename;
     private String extension;
     private String folder;
     private String suffix;
+    private String timestamp;
 
     private String outputFolder;
 
@@ -83,7 +81,7 @@ public class PictureSketchV2 extends PApplet {
 
     public void initSketch() {
 	Instructions.setFile(this);
-	log = new Logger(outputFolder, folder, filename, suffix, false);
+	log = new Logger(outputFolder, folder, filename, suffix, timestamp, false);
 	source = new Source(log, this);
 
 	contour = new Dcontour(log, this, stabilo);
@@ -150,7 +148,7 @@ public class PictureSketchV2 extends PApplet {
 	}
 
 	if (saveImage) {
-	    save("/" + outputFolder + "/" + filename + "_" + suffix + ".png");
+	    save("/" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".png");
 	    log.writeLogLine("PNG saved as: /" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".png");
 	}
 
@@ -243,6 +241,7 @@ public class PictureSketchV2 extends PApplet {
 	this.extension = extension;
 	this.suffix = suffix;
 	this.outputFolder = outputFolder;
+	this.timestamp = timestamp;
 	// if (extension.equalsIgnoreCase("mov")) {
 	// fileIsMovie = true;
 	// }
