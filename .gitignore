@@ -9,5 +9,11 @@ $ cat .gitignore
 
 # Can also ignore all directories and files in a directory.
 bin/ 
-
-/target/
+target/**
+output/
+movs/
+faces/
+out/
+SVG/
+photos/
+libraries/

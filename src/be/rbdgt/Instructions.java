@@ -29,7 +29,7 @@ public class Instructions {
 	 * SC.BLACK);
 	 */
 
-	pa.facepattern.drawface(1, Shape.TRIANGLE, 45, 130, 120, 1, 60, SC.TURQUOISE, 100, 1);
+	pa.facepattern.drawface(1, Shape.TRIANGLE, 45, 130, 120, 1, 60, SC.TURQUOISE, 20, Hatch.ARAB);
 	// pa.delaunaySquares.draw(source.oi(false), 1, SC.BLACK, SC.APRICOT, 0, 10, 20, 5, 0);
 	// pa.contour.draw(source.fci(false, TRIANGLE, -90, -0, 50, 150), 1,
 	// SC.BLACK);
