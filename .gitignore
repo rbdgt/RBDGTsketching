@@ -8,8 +8,9 @@ $ cat .gitignore
 #*.swp
 
 # Can also ignore all directories and files in a directory.
-bin/ 
-target/**
+bin/
+card/
+target/*
 output/
 movs/
 faces/
@@ -17,3 +18,4 @@ out/
 SVG/
 photos/
 libraries/
+/target/
