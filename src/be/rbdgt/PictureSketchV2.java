@@ -29,9 +29,13 @@ public class PictureSketchV2 extends PApplet {
 
     private Stabilo stabilo = new Stabilo(this);
 
-//    LocalDateTime now = LocalDateTime.now();
-//    String timestamp = "_" + String.format("%02d",now.getHour()) + String.format("%02d",now.getMinute()) + String.format("%02d",now.getSecond()) + "_" + String.format("%02d",now.getDayOfMonth())
-//	    + String.format("%02d",now.getMonthValue()) + String.format("%02d",now.getYear());
+    // LocalDateTime now = LocalDateTime.now();
+    // String timestamp = "_" + String.format("%02d",now.getHour()) +
+    // String.format("%02d",now.getMinute()) +
+    // String.format("%02d",now.getSecond()) + "_" +
+    // String.format("%02d",now.getDayOfMonth())
+    // + String.format("%02d",now.getMonthValue()) +
+    // String.format("%02d",now.getYear());
 
     private String filename;
     private String extension;
@@ -64,6 +68,8 @@ public class PictureSketchV2 extends PApplet {
     boolean saveSVG = true;
     boolean saveImage = true;
 
+    boolean keypressedFlag = false;
+    
     float scale = 3;
     int setWidth = 800;
 
@@ -98,12 +104,6 @@ public class PictureSketchV2 extends PApplet {
 	crosses = new Dcrosses(log, this, stabilo);
     }
 
-    // private void parseArgs() {
-    // if (args != null) {
-    // parser.parseInstr(args);
-    // }
-    // }
-
     public void settings() {
 	if (fileIsMovie) {
 	    size(1280, 720);
@@ -126,42 +126,43 @@ public class PictureSketchV2 extends PApplet {
     }
 
     public void draw() {
-	// if (!fileIsMovie) {
-	// original.resize(width, height);
-	// }
-
 	original.resize(width, height);
-
-	log.createLog("width: " + width + " / height: " + height);
-
-	if (saveSVG) {
-	    beginRecord(SVG, "/" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".svg");
-	    println("Begin SVG record: ");
+	image(original, 0, 0);
+			
+	if (keypressedFlag) {
+	    background(255);
+	    log.createLog("width: " + width + " / height: " + height);
+	    if (saveSVG) {
+		beginRecord(SVG, "/" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".svg");
+		println("Begin SVG record: ");
+	    }
+	    Instructions.draw(this);
+	    if (saveSVG) {
+		endRecord();
+		println("End SVG record.");
+		log.writeLogLine("SVG saved as: /" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".svg");
+	    }
+	    if (saveImage) {
+		save("/" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".png");
+		log.writeLogLine("PNG saved as: /" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".png");
+	    }
+	    log.closeLog();
+	    if (fileIsMovie) {
+		loop();
+	    } else {
+		noLoop();
+	    }
+	    fCount++;
+	    println("Frame " + fCount + " done!");
 	}
-
-	Instructions.draw(this);
-
-	if (saveSVG) {
-	    endRecord();
-	    println("End SVG record.");
-	    log.writeLogLine("SVG saved as: /" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".svg");
-	}
-
-	if (saveImage) {
-	    save("/" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".png");
-	    log.writeLogLine("PNG saved as: /" + outputFolder + "/" + filename + "_" + suffix + timestamp + ".png");
-	}
-
-	log.closeLog();
-
-	if (fileIsMovie) {
-	    loop();
-	} else {
-	    noLoop();
-	}
-
-	fCount++;
-	println("Frame " + fCount + " done!");
+    }
+    
+    public void keyPressed(){
+	keypressedFlag = true;
+    }
+    
+    public void showOriginalFirst(boolean flag){
+	keypressedFlag = flag;
     }
 
     private void resizeMethod() {
@@ -233,9 +234,10 @@ public class PictureSketchV2 extends PApplet {
 	return this.source;
     }
 
-    public void setFile(String folder, String filename, String extension, String suffix, String outputFolder, String timestamp) { // TODO
-														// too
-														// convoluted
+    public void setFile(String folder, String filename, String extension, String suffix, String outputFolder,
+	    String timestamp) { // TODO
+	// too
+	// convoluted
 	this.folder = folder;
 	this.filename = filename;
 	this.extension = extension;

@@ -15,7 +15,8 @@ public class Instructions {
 	    + String.format("%02d",now.getMonthValue()) + String.format("%02d",now.getYear());
 
     public static void setFile(PictureSketchV2 pa) {
-	pa.setFile("faces", "male", "jpg", "01", "output", timestamp);
+	pa.showOriginalFirst(true);
+	pa.setFile("faces", "female", "jpg", "01", "output", timestamp);
     }
 
     public static void draw(PictureSketchV2 pa) {
@@ -29,7 +30,7 @@ public class Instructions {
 	 * SC.BLACK);
 	 */
 
-	pa.facepattern.drawface(1, Shape.TRIANGLE, 45, 130, 120, 1, 60, SC.TURQUOISE, 20, Hatch.ARAB);
+	pa.facepattern.drawface(1, Shape.TRIANGLE, 45, 130, 120, 1, 60, SC.TURQUOISE, 100, Hatch.RIGHT);
 	// pa.delaunaySquares.draw(source.oi(false), 1, SC.BLACK, SC.APRICOT, 0, 10, 20, 5, 0);
 	// pa.contour.draw(source.fci(false, TRIANGLE, -90, -0, 50, 150), 1,
 	// SC.BLACK);
