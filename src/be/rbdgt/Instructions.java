@@ -2,10 +2,12 @@ package be.rbdgt;
 
 import java.time.LocalDateTime;
 
+import be.rbdgt.camera.Camera;
 import be.rbdgt.util.Hatch;
 import be.rbdgt.util.SC;
 import be.rbdgt.util.Shape;
 import be.rbdgt.util.Source;
+import processing.core.PImage;
 
 public class Instructions {
    
@@ -16,11 +18,13 @@ public class Instructions {
 
     public static void setFile(PictureSketchV2 pa) {
 	pa.showOriginalFirst(true);
+	//pa.useCamera(false);
 	pa.setFile("faces", "female", "jpg", "01", "output", timestamp);
     }
 
     public static void draw(PictureSketchV2 pa) {
 	source = pa.getSource();
+	//Camera.setup(pa);
 
 	/*
 	 * pa.facepattern.drawface(1, TRIANGLE, 180, 0, 0, 1, 60,
@@ -30,7 +34,7 @@ public class Instructions {
 	 * SC.BLACK);
 	 */
 
-	pa.facepattern.drawface(1, Shape.TRIANGLE, 45, 130, 120, 1, 60, SC.TURQUOISE, 100, Hatch.RIGHT);
+	//pa.facepattern.drawface(1, Shape.TRIANGLE, 45, 130, 120, 1, 60, SC.TURQUOISE, 100, Hatch.RIGHT);
 	// pa.delaunaySquares.draw(source.oi(false), 1, SC.BLACK, SC.APRICOT, 0, 10, 20, 5, 0);
 	// pa.contour.draw(source.fci(false, TRIANGLE, -90, -0, 50, 150), 1,
 	// SC.BLACK);
@@ -45,13 +49,14 @@ public class Instructions {
 	// pa.vertex.draw(source.fchi(false, TRIANGLE, 0, -0, 0, 150), 1,
 	// SC.BLACK);
 
-	//PImage img = source.ci(false, 20, 40);
-
+	PImage img = source.cannyImage(false, 200, 500, 80);
+	pa.image(img, 0, 0);
 	
 	//pa.delaunaySquares.draw(source.oi(false), 1, SC.BLACK, SC.RED, 0, 10, 20, 5, 0);
 	
 	//pa.delaunaySquares.draw(source.oi(false), 1, SC.NIGHTBLUE, SC.TURQUOISE, 0, 10, 20, 5, 0);
-	pa.contour.draw(source.cannyImage(false, 200, 500, 180), 1, SC.BLACK);
+	//pa.contour.draw(source.cannyImage(false, 200, 500, 80), 1, SC.BLACK);
+	//pa.contour.draw(source.cannyImage(false, 200, 500, 180), 1, SC.BLACK);
 	//pa.contour.draw(source.cannyImage(false, 20, 40, 180), 1, SC.RED);
 	
 	//pa.contour.draw(source.cannyImage(false, 100, 250, 180), 1, SC.BLACK);

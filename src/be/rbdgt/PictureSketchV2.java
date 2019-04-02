@@ -29,14 +29,6 @@ public class PictureSketchV2 extends PApplet {
 
     private Stabilo stabilo = new Stabilo(this);
 
-    // LocalDateTime now = LocalDateTime.now();
-    // String timestamp = "_" + String.format("%02d",now.getHour()) +
-    // String.format("%02d",now.getMinute()) +
-    // String.format("%02d",now.getSecond()) + "_" +
-    // String.format("%02d",now.getDayOfMonth())
-    // + String.format("%02d",now.getMonthValue()) +
-    // String.format("%02d",now.getYear());
-
     private String filename;
     private String extension;
     private String folder;
@@ -69,6 +61,7 @@ public class PictureSketchV2 extends PApplet {
     boolean saveImage = true;
 
     boolean keypressedFlag = false;
+    boolean useCameraFlag = false;
     
     float scale = 3;
     int setWidth = 800;
@@ -161,6 +154,10 @@ public class PictureSketchV2 extends PApplet {
 	keypressedFlag = true;
     }
     
+//    public void useCamera(boolean useCam){
+//	useCameraFlag = useCam;
+//    }
+    
     public void showOriginalFirst(boolean flag){
 	keypressedFlag = flag;
     }
@@ -248,14 +245,4 @@ public class PictureSketchV2 extends PApplet {
 	// fileIsMovie = true;
 	// }
     }
-
-    // public void setFile(String[] fd) { // TODO
-    // // too
-    // // convoluted
-    // this.folder = fd[0];
-    // this.filename = fd[1];
-    // this.extension = fd[2];
-    // this.suffix = fd[3];
-    // this.outputFolder = fd[4];
-    // }
 }

@@ -52,16 +52,16 @@ public class Source {
 		return facesOriginalHighContrastImage(invert, shape, rotation, shrink);
 	}
 
-	public PImage fci(boolean invert, int shape, int rotation, int shrink, int lC, int rC, int tH) {
-		return facesCannyImage(invert, shape, rotation, shrink, lC, rC, tH);
+	public PImage fci(boolean invert, int shape, int rotation, int shrink, int lowCannyThreshold, int highCannyThreshold, int imgThreshold) {
+		return facesCannyImage(invert, shape, rotation, shrink, lowCannyThreshold, highCannyThreshold, imgThreshold);
 	}
 
-	public PImage fchi(boolean invert, int shape, int rotation, int shrink, int lC, int rC, int tH) {
-		return facesCannyHollowImage(invert, shape, rotation, shrink, lC, rC, tH);
+	public PImage fchi(boolean invert, int shape, int rotation, int shrink, int lowCannyThreshold, int highCannyThreshold, int imgThreshold) {
+		return facesCannyHollowImage(invert, shape, rotation, shrink, lowCannyThreshold, highCannyThreshold, imgThreshold);
 	}
 
-	public PImage ci(boolean invert, int lC, int rC, int tH) {
-		return cannyImage(invert, lC, rC, tH);
+	public PImage ci(boolean invert, int lowCannyThreshold, int highCannyThreshold, int imgThreshold) {
+		return cannyImage(invert, lowCannyThreshold, highCannyThreshold, imgThreshold);
 	}
 
 	/*public ArrayList<Contour> originalArraylist(PictureSketchV2 pa, boolean invert) {
@@ -73,7 +73,7 @@ public class Source {
 	}*/
 
 	public PImage originalImage(boolean invert) {
-		this.info = "oi("+invert+")";
+		this.info = "originalImage("+invert+")";
 		PImage input = pa.getOriginal();
 		if (invert) {
 			input.filter(PConstants.INVERT);
@@ -82,7 +82,7 @@ public class Source {
 	}
 
 	public PImage originalHighContrastImage(boolean invert) {
-		this.info = "ohci("+invert+")";
+		this.info = "originalHighContrastImage("+invert+")";
 		PImage input = pa.getOriginal();
 		input.filter(PConstants.THRESHOLD);
 		if (invert) {
@@ -93,7 +93,7 @@ public class Source {
 
 	public PImage facesOriginalImage(boolean invert, int shape, int rotation, int shrink) {
 		PImage input = faceImage(shape, rotation, shrink);
-		this.info = "foi("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+")";
+		this.info = "facesOriginalImage("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+")";
 		if (invert) {
 			input.filter(PConstants.INVERT);
 		}
@@ -102,7 +102,7 @@ public class Source {
 
 	public PImage facesOriginalHollowImage(boolean invert, int shape, int rotation, int shrink) {
 		PImage input = faceImageHollow(shape, rotation, shrink);
-		this.info = "fohi("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+")";
+		this.info = "facesOriginalHollowImage("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+")";
 
 		if (invert) {
 			input.filter(PConstants.INVERT);
@@ -113,7 +113,7 @@ public class Source {
 	public PImage facesOriginalHighContrastImage(boolean invert, int shape, int rotation,
 			int shrink) {
 		PImage input = faceImage(shape, rotation, shrink);
-		this.info = "fohci("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+")";
+		this.info = "facesOriginalHighContrastImage("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+")";
 		input.filter(PConstants.THRESHOLD);
 		if (invert) {
 			input.filter(PConstants.INVERT);
@@ -121,39 +121,62 @@ public class Source {
 		return input;
 	}
 
-	public PImage facesCannyImage(boolean invert, int shape, int rotation, int shrink, int lC,
-			int rC, int threshold) {
+	public PImage facesCannyImage(boolean invert, int shape, int rotation, int shrink, int lowCannyThreshold,
+			int  highCannyThreshold, int imgThreshold) {
 		OpenCV openCV = new OpenCV(pa, faceImage(shape, rotation, shrink));
-		this.info = "fci("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+", "+lC+", "+rC+")";
-		openCV.threshold(threshold);
-		openCV.findCannyEdges(lC, rC);
+		this.info = "facesCannyImage("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+", "+lowCannyThreshold+", "+highCannyThreshold+")";
+		openCV.threshold(imgThreshold);
+		openCV.findCannyEdges(lowCannyThreshold, highCannyThreshold);
 		if (invert) {
 			openCV.invert();
 		}
 		return openCV.getSnapshot();
 	}
 
-	public PImage facesCannyHollowImage(boolean invert, int shape, int rotation, int shrink, int lC,
-			int rC, int threshold) {
+	public PImage facesCannyHollowImage(boolean invert, int shape, int rotation, int shrink, int lowCannyThreshold,
+			int highCannyThreshold, int imgThreshold) {
 		OpenCV openCV = new OpenCV(pa, faceImageHollow(shape, rotation, shrink));
-		this.info = "fchi("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+", "+lC+", "+rC+")";
-		openCV.threshold(threshold);
-		openCV.findCannyEdges(lC, rC);
+		this.info = "facesCannyHollowImage("+invert+", "+poly.getShapeName(shape)+", "+rotation+", "+shrink+", "+lowCannyThreshold+", "+highCannyThreshold+")";
+		openCV.threshold(imgThreshold);
+		openCV.findCannyEdges(lowCannyThreshold, highCannyThreshold);
 		if (invert) {
 			openCV.invert();
 		}
 		return openCV.getSnapshot();
 	}
 
-	public PImage cannyImage(boolean invert, int lC, int rC, int threshold) {
+	public PImage cannyImage(boolean invert, int lowCannyThreshold, int highCannyThreshold, int imgThreshold) {
 		OpenCV openCV = new OpenCV(pa, pa.getOriginal());
-		this.info = "ci("+invert+", "+lC+", "+rC+")";
-		openCV.threshold(threshold);
-		openCV.findCannyEdges(lC, rC);
+		this.info = "cannyImage("+invert+", "+lowCannyThreshold+", "+highCannyThreshold+")";
+		openCV.threshold(imgThreshold);
+		openCV.findCannyEdges(lowCannyThreshold, highCannyThreshold);
 		if (invert) {
 			openCV.invert();
 		}
 		
+		return openCV.getSnapshot();
+	}
+	
+	public PImage sobelImage(boolean invert, int directionX, int directionY, int imgThreshold) {
+		OpenCV openCV = new OpenCV(pa, pa.getOriginal());
+		this.info = "sobelImage("+invert+", "+directionX+", "+directionY+")";
+		openCV.threshold(imgThreshold);
+		openCV.findSobelEdges(directionX, directionY);
+		if (invert) {
+			openCV.invert();
+		}
+		
+		return openCV.getSnapshot();
+	}
+	
+	public PImage scharrImage(boolean invert, int direction, int imgThreshold) {
+		OpenCV openCV = new OpenCV(pa, pa.getOriginal());
+		this.info = "scharrImage("+invert+", "+direction+");";
+		openCV.threshold(imgThreshold);
+		openCV.findScharrEdges(direction);
+		if (invert) {
+			openCV.invert();
+		}
 		return openCV.getSnapshot();
 	}
 
@@ -194,31 +217,31 @@ public class Source {
 		return faceimg;
 	}
 
-	private PGraphics imagemask(PictureSketchV2 pa, int shape, int rotation, int x, int y, int w, int h) {
-		PGraphics mask = pa.createGraphics(w, h, PConstants.JAVA2D);
+	private PGraphics imagemask(PictureSketchV2 pa, int shape, int rotation, int xPos, int yPos, int width, int height) {
+		PGraphics mask = pa.createGraphics(width, height, PConstants.JAVA2D);
 		int shrink = 0;
 		mask.beginDraw();
 		mask.fill(255);
 		mask.noStroke();
-		drawShape(mask, shape, rotation, shrink, 0, 0, w, h);
+		drawShape(mask, shape, rotation, shrink, 0, 0, width, height);
 		mask.filter(PConstants.BLUR, 0);
 		mask.endDraw();
 		return mask;
 	}
 
-	private void drawShape(PGraphics output, int shape, int rotation, int shrink, int x, int y, int w, int h) {
+	private void drawShape(PGraphics output, int shape, int rotation, int shrink, int xPos, int yPos, int width, int height) {
 		switch (shape) {
 		case 0:
 			poly = new Polygon(shape);
-			poly.drawPoly(output, true, x + w / 2, y + h / 2, h - shrink, rotation);
+			poly.drawPoly(output, true, xPos + width / 2, yPos + height / 2, height - shrink, rotation);
 			break;
 		case 1:
 			poly = new Polygon(shape);
-			poly.drawPoly(output, true, x + w / 2, y + h / 2, h - shrink, rotation);
+			poly.drawPoly(output, true, xPos + width / 2, yPos + height / 2, height - shrink, rotation);
 			break;
 		case 2:
 			poly = new Polygon(shape);
-			poly.drawPoly(output, true, x + w / 2, y + h / 2, h - shrink, rotation);
+			poly.drawPoly(output, true, xPos + width / 2, yPos + height / 2, height - shrink, rotation);
 			break;
 		}
 	}
